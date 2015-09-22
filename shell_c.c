@@ -9,12 +9,34 @@ void print_menu(void){
 	printf("Type in what you want to start\n ");
 
 }
+void startcmd(char *cmd,char* tokcmd){
+
+	char *tcmd;
+	char *cmdop;
+
+	tcmd=strtok(cmd," ");
+	cmdop=strtok(NULL," ");
+
+	char *mpath=getenv("PATH");
+	char *tokpath;
+
+	tokpath=strtok(mpath,":");
+	while(tokpath=(NULL,"PATH"));
+	printf("%s \n",tokpath);
+	}
+}
+
+	
 
 int main(){
-	int cmd;
-	char scmd[512]=NULL;
+	char *cmd;
+	char *tokcmd;
+
+	char *mpath=getenv("PATH");
+	char *tokpath;
 
 	print_menu();
+	
 	getline(scmd,512);
 	scanf("%d",&cmd);
 	while(cmd!=0){
