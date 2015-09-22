@@ -9,7 +9,8 @@ void print_menu(void){
 	printf("Type in what you want to start\n ");
 
 }
-void startcmd(char *cmd,char* tokcmd){
+
+void startcmd(char *cmd){
 
 	char *tcmd;
 	char *cmdop;
@@ -17,29 +18,30 @@ void startcmd(char *cmd,char* tokcmd){
 	tcmd=strtok(cmd," ");
 	cmdop=strtok(NULL," ");
 
+	printf("//%s \n //%s\n",tcmd,cmdop);
+
+
 	char *mpath=getenv("PATH");
 	char *tokpath;
 
 	tokpath=strtok(mpath,":");
-	while(tokpath=(NULL,"PATH"));
+
+	while(tokpath=(NULL,":")){
 	printf("%s \n",tokpath);
+	//	sprintf(
+
 	}
 }
 
-	
-
 int main(){
-	char *cmd;
-	char *tokcmd;
-
-	char *mpath=getenv("PATH");
-	char *tokpath;
-
-	print_menu();
+	char cmd[512];
 	
-	getline(scmd,512);
-	scanf("%d",&cmd);
-	while(cmd!=0){
+	print_menu();
+	fgets(cmd,512,stdin);
+
+	printf("%s\n\n\n",cmd);
+
+	while(cmd!=NULL){
 		int pid=fork();
 		if(pid==-1){
 			printf("fork error\n");
@@ -47,23 +49,22 @@ int main(){
 		else if(pid==0){
 			printf("this is child with pid: %d\n",getpid());
 			printf("parent pid is: %d\n",getppid());
-			switch(cmd){
-				case 1: execl("/usr/bin/who","who",NULL);
-				case 2: execl("/bin/ls","ls",NULL);
-				case 3: execl("/usr/bin/uptime","uptime",NULL);
-				case 4: execl("/bin/ps","ps",NULL);
-				default: printf("NO DAP\n");
-			}
-			exit(1);		}
+			printf("////////////////////////////////////////////\n");
+			startcmd(cmd);
+			exit(1);	
+		}
 		else {
 			printf("this is parent with pid: %d\n",getpid());
 			printf("waiting\n");
+			printf("///////////////////////////////////////////\n");
 			wait();
 			printf("returned to parent with pid: %d\n",getpid());
+			printf("///////////////////////////////////////////\n");
 		}
 		print_menu();
-		getline(scmd,512);
-		scanf("%d",&cmd);
+		//cmd=NULL;
+		//getline(scmd,512);
+		fgets(cmd,512,stdin);
 	}
 	printf("exiting program\n");
 }
