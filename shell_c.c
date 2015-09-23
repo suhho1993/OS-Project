@@ -1,13 +1,11 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
-#include <strings.h>
+#include <string.h>
 
 
 void print_menu(void){
-	printf("This is simple shell program by Suhho\n");
-	printf("Type in what you want to start\n ");
-
+	printf("//Shell Suhho>>");
 }
 
 void startcmd(char *cmd){
@@ -43,7 +41,7 @@ void startcmd(char *cmd){
 
 }
 
-int main(){
+int main(int argc, char* argv[]){
 	char cmd[512];
 	
 	print_menu();
